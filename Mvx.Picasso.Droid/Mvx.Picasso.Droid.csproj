@@ -81,6 +81,8 @@
     <Compile Include="Plugin.cs" />
     <Compile Include="TargetBindings\ImageViewPicassoTargetBinding.cs" />
     <Compile Include="Combiners\PicassoCombiner.cs" />
+    <Compile Include="Converters\PicassoBasicLoadConverter.cs" />
+    <Compile Include="Converters\BasePicassoConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -88,6 +90,7 @@
   <ItemGroup>
     <Folder Include="TargetBindings\" />
     <Folder Include="Combiners\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mvx.Picasso\Mvx.Picasso.csproj">
