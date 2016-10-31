@@ -1,5 +1,4 @@
-﻿using System;
-using Android.Widget;
+﻿using Android.Widget;
 using MvvmCross.Binding.Bindings.Target.Construction;
 using MvvmCross.Binding.Combiners;
 using MvvmCross.Platform.Converters;

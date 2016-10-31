@@ -83,6 +83,8 @@
     <Compile Include="Combiners\PicassoCombiner.cs" />
     <Compile Include="Converters\PicassoBasicLoadConverter.cs" />
     <Compile Include="Converters\BasePicassoConverter.cs" />
+    <Compile Include="Converters\PicassoRoundLoadConverter.cs" />
+    <Compile Include="Transforms\CircleTransform.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -91,6 +93,7 @@
     <Folder Include="TargetBindings\" />
     <Folder Include="Combiners\" />
     <Folder Include="Converters\" />
+    <Folder Include="Transforms\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mvx.Picasso\Mvx.Picasso.csproj">
