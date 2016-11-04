@@ -115,7 +115,7 @@ namespace Mvx.Picasso.Droid
 						requestCreator = requestCreator.Priority(Square.Picasso.Picasso.Priority.Low);
 						break;
 					case CircleTransform:
-						//requestCreator = requestCreator.Transform(new CircleTransformation());
+						requestCreator = requestCreator.Transform(new CircleTransform());
 						break;
 					default:
 						//TODO: Placeholder, Error, Resize, ResizeDimen, Rotate, Transform
