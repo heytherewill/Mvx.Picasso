@@ -23,7 +23,8 @@ namespace Mvx.Picasso.Droid
 
 		private void OnConverterRegistryRegistered(IMvxValueConverterRegistry registry)
 		{
-			registry.AddOrOverwrite("BasicLoad", new PicassoBasicLoadConverter());
+			registry.AddOrOverwrite("LoadSimple", new PicassoBasicLoadConverter());
+			registry.AddOrOverwrite("LoadRound", new PicassoRoundLoadConverter());
 		}
 
 		private void OnTargetBindingFactoryRegistryRegistered(IMvxTargetBindingFactoryRegistry registry)
