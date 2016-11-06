@@ -4,6 +4,7 @@ using MvvmCross.Binding.Combiners;
 using System.Collections.Generic;
 using MvvmCross.Binding.Bindings.SourceSteps;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Mvx.Picasso.Droid
 {
@@ -23,6 +24,13 @@ namespace Mvx.Picasso.Droid
 		private const string PriorityNormal = "PriorityNormal";
 		private const string PriorityLow = "PriorityLow";
 		private const string CircleTransform = "CircleTransform";
+
+		private const string Placeholder = "Placeholder";
+		private const string Error = "Error";
+		private const string Rotate = "Rotate";
+		private const string Resize = "Resize";
+		private const string ResizeDimen = "ResizeDimen";
+		private const string Transform = "Transform";
 
 		public static bool IndicatorsEnabled
 		{
@@ -118,13 +126,71 @@ namespace Mvx.Picasso.Droid
 						requestCreator = requestCreator.Transform(new CircleTransform());
 						break;
 					default:
-						//TODO: Placeholder, Error, Resize, ResizeDimen, Rotate, Transform
+
+						if (option.StartsWith(Placeholder, System.StringComparison.Ordinal))
+						{
+							var parameters = GetParametersFromString<int>(Placeholder, option).ToList();
+							if (parameters.Count != 1) continue;
+							requestCreator = requestCreator.Placeholder(parameters.Single());
+						}
+						else if (option.StartsWith(Error, System.StringComparison.Ordinal))
+						{
+							var parameters = GetParametersFromString<int>(Error, option).ToList();
+							if (parameters.Count != 1) continue;
+							requestCreator = requestCreator.Error(parameters.Single());
+						}
+						else if (option.StartsWith(Resize, System.StringComparison.Ordinal))
+						{
+							var parameters = GetParametersFromString<int>(Resize, option).ToList();
+							if (parameters.Count != 2) continue;
+							requestCreator = requestCreator.Resize(parameters[0], parameters[1]);
+						}
+						else if (option.StartsWith(ResizeDimen, System.StringComparison.Ordinal))
+						{
+							var parameters = GetParametersFromString<int>(ResizeDimen, option).ToList();
+							if (parameters.Count != 2) continue;
+							requestCreator = requestCreator.ResizeDimen(parameters[0], parameters[1]);
+						}
+						else if (option.StartsWith(Rotate, System.StringComparison.Ordinal))
+						{
+							var parameters = GetParametersFromString<int>(Rotate, option).ToList();
+
+							if (parameters.Count == 3)
+							{
+								requestCreator = requestCreator.Rotate(parameters[0], parameters[1], parameters[2]);
+							}
+							else if(parameters.Count == 1)
+							{
+								requestCreator = requestCreator.Rotate(parameters[0]);
+							}
+						}
+						else if (option.StartsWith(Transform, System.StringComparison.Ordinal))
+						{
+							var parameters = GetParametersFromString<int>(Transform, option).ToList();
+							if (parameters.Count != 1) continue;
+							requestCreator = requestCreator.Placeholder(parameters.Single());
+						}
+
 						break;
 				}
 			}
 
 			value = requestCreator;
 			return true;
+		}
+
+		private IEnumerable<T> GetParametersFromString<T>(string methodName, string method)
+		{
+			var regex = new Regex($@"{methodName}\((.+)\)");
+			var matches = regex.Matches(method);
+
+			if (matches != null)
+			{
+				foreach (var match in matches)
+				{
+					yield return (T)match;
+				}
+			}
 		}
 	}
 }

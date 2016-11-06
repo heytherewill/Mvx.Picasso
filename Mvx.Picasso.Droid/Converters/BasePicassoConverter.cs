@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using MvvmCross.Platform.Converters;
+using MvvmCross.Platform.Droid;
 using Square.Picasso;
 
 namespace Mvx.Picasso.Droid
